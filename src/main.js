@@ -495,6 +495,8 @@ function prepareSelectInputsForExport(node) {
     const selects = node.querySelectorAll('select');
 
     selects.forEach((select) => {
+        const selectedValue = select.value;
+        const selectedIndex = select.selectedIndex;
         const optionSnapshots = Array.from(select.options).map((option) => ({
             defaultSelected: option.defaultSelected,
             hasSelectedAttr: option.hasAttribute('selected')
@@ -512,6 +514,8 @@ function prepareSelectInputsForExport(node) {
                 option.defaultSelected = snapshot.defaultSelected;
                 option.toggleAttribute('selected', snapshot.hasSelectedAttr);
             });
+            select.value = selectedValue;
+            if (select.value !== selectedValue) select.selectedIndex = selectedIndex;
         });
     });
 
