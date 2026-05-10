@@ -1,6 +1,8 @@
 这是一个简单美观的 VPS 剩余价值计算器，支持多种货币、自定义汇率，并可以生成精美的分享图片。
 
-![demo](./demo.png)
+![demo](./demo1.webp)
+
+![demo](./demo2.webp)
 
 ✨ **特性**：
 - 💰 支持多币种自动汇率转换 (USD, EUR, GBP, JPY 等)
@@ -29,7 +31,7 @@
 ```bash
 npx wrangler deploy
 ```
-#### 一键 Cloudflare Pages 部署：
+#### 一键 Cloudflare 部署：
 
 [![Deploy to Cloudflare Workers](https://deploy.workers.cloudflare.com/button)](https://deploy.workers.cloudflare.com/?url=https://github.com/verkyer/vps-jsq)
 
