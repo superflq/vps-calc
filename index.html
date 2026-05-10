@@ -4,8 +4,72 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>VPS 剩余价值</title>
+    <script>
+        (() => {
+            try {
+                const savedTheme = localStorage.theme;
+                const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+                document.documentElement.classList.toggle('dark', savedTheme === 'dark' || (!savedTheme && prefersDark));
+            } catch (err) {
+                document.documentElement.classList.add('dark');
+            }
+        })();
+    </script>
+    <style>
+        .app-loader {
+            position: fixed;
+            inset: 0;
+            z-index: 9999;
+            display: grid;
+            place-items: center;
+            background: #f0f2f5;
+            transition: opacity 120ms ease, visibility 120ms ease;
+        }
+
+        html.dark .app-loader {
+            background: #17171c;
+        }
+
+        .app-loader.is-hidden {
+            visibility: hidden;
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .app-loader__dot {
+            width: 18px;
+            height: 18px;
+            border: 2px solid rgba(100, 116, 139, 0.2);
+            border-top-color: #f59e0b;
+            border-radius: 9999px;
+            animation: app-loader-spin 650ms linear infinite;
+        }
+
+        html.dark .app-loader__dot {
+            border-color: rgba(212, 212, 216, 0.16);
+            border-top-color: #fbbf24;
+        }
+
+        @keyframes app-loader-spin {
+            to { transform: rotate(360deg); }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .app-loader {
+                transition: none;
+            }
+
+            .app-loader__dot {
+                animation: none;
+            }
+        }
+    </style>
 </head>
 <body class="min-h-screen flex flex-col items-center justify-center p-3 md:p-4 text-slate-800 dark:text-zinc-300">
+
+    <div id="appLoader" class="app-loader" role="status" aria-label="页面加载中">
+        <span class="app-loader__dot" aria-hidden="true"></span>
+    </div>
 
     <main id="captureRoot" class="w-full max-w-4xl relative">
         

@@ -54,16 +54,30 @@ let remainingValueCNY = 0;
 let quoteLastEdited = 'premium';
 
 window.addEventListener('DOMContentLoaded', () => {
-    initTheme();
-    loadInputsFromCookie(); 
-    initQuoteFields();
-    initDates(); 
-    syncDateDisplay(els.dueDate);
-    syncDateDisplay(els.tradeDate);
-    initRates(); 
-    setupEventListeners();
-    calculate(); 
+    try {
+        initTheme();
+        loadInputsFromCookie(); 
+        initQuoteFields();
+        initDates(); 
+        syncDateDisplay(els.dueDate);
+        syncDateDisplay(els.tradeDate);
+        initRates(); 
+        setupEventListeners();
+        calculate(); 
+    } finally {
+        hideAppLoader();
+    }
 });
+
+function hideAppLoader() {
+    const loader = document.getElementById('appLoader');
+    if (!loader) return;
+
+    requestAnimationFrame(() => {
+        loader.classList.add('is-hidden');
+        window.setTimeout(() => loader.remove(), 180);
+    });
+}
 
 function setupEventListeners() {
     const debouncedSave = debounce(saveInputsToCookie, 500);
